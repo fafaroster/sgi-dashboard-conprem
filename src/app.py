@@ -44,6 +44,24 @@ from src.dashboard.custom_css import inject_futuristic_css
 inject_futuristic_css()
 
 # =============================================================================
+# Main Login Gate — protects entire dashboard
+# =============================================================================
+
+_MAIN_PASSWORD = "conprem2026"
+
+if not st.session_state.get("main_auth", False):
+    st.markdown("## 🔐 Dashboard SGI — CONPREM GRAU")
+    st.markdown("Ingrese la clave de acceso para continuar.")
+    pwd = st.text_input("Clave de acceso", type="password", key="main_login_input")
+    if pwd:
+        if pwd == _MAIN_PASSWORD:
+            st.session_state["main_auth"] = True
+            st.rerun()
+        else:
+            st.error("Clave incorrecta")
+    st.stop()
+
+# =============================================================================
 # Remaining imports (after set_page_config)
 # =============================================================================
 

@@ -6,15 +6,37 @@
 
 ## 1. REQUISITOS PREVIOS
 
+### Para acceso Online:
 | Requisito | Detalle |
 |-----------|---------|
-| Computador | Mac o PC con navegador web (Chrome, Safari, Firefox) |
+| Navegador web | Chrome, Safari, Firefox o Edge (cualquier versión moderna) |
+| Internet | Cualquier conexión |
+| Instalación | **No requiere instalar nada** |
+
+### Para acceso Local (opcional):
+| Requisito | Detalle |
+|-----------|---------|
+| Computador | Mac o PC con navegador web |
 | Python | Versión 3.11 o superior instalada |
-| Conexión | No requiere internet para operar (funciona 100% local) |
+| Conexión | Solo para la primera instalación |
 
 ---
 
-## 2. INSTALACIÓN (Solo la primera vez)
+## 2. ACCESO AL DASHBOARD
+
+### Opción A — Online (recomendado)
+
+Abra directamente en su navegador:
+
+👉 **https://fafaroster-sgi-dashboard-conprem-srcapp-b0twzg.streamlit.app**
+
+No requiere instalar nada. Funciona desde cualquier computador, tablet o celular con internet.
+
+---
+
+### Opción B — Local (sin internet)
+
+Si prefiere ejecutar el dashboard en su propio computador:
 
 Abra la Terminal y ejecute estos comandos:
 
@@ -30,9 +52,9 @@ Si le pide permisos, agregue `--break-system-packages` al final del comando pip.
 
 ---
 
-## 3. INICIAR EL DASHBOARD
+## 3. INICIAR EL DASHBOARD (Solo acceso local)
 
-Cada vez que quiera usar el dashboard:
+Si usa la versión local, cada vez que quiera usar el dashboard:
 
 ```bash
 cd "/Users/rafaelparra/Desktop/DASHBORD INFORME ISO"
@@ -190,10 +212,10 @@ Los filtros y ediciones en la tabla OdM se reinician al cerrar. Los datos del in
 Sí, editando el archivo `data/informe_hallazgos.md` con el mismo formato de tabla Markdown. El dashboard lo recargará al reiniciar.
 
 **¿Funciona en otro computador?**
-Sí. Copie toda la carpeta "DASHBORD INFORME ISO" y siga los pasos de instalación.
+Sí. Use la URL online: https://fafaroster-sgi-dashboard-conprem-srcapp-b0twzg.streamlit.app — funciona desde cualquier dispositivo con internet sin instalar nada.
 
 **¿Necesito internet?**
-Solo para la primera instalación (pip install). Después funciona 100% offline.
+Para la versión online, sí. Para la versión local, solo para la primera instalación (pip install). Después funciona offline.
 
 **¿Puedo cambiar la clave de acceso?**
 Sí. Busque `conprem2026` en el archivo `src/app.py` y cámbiela por la clave que prefiera.
