@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "sgi-audit-dashboard"
+version = "0.1.0"
+description = "Interactive SGI Audit Dashboard for CONPREM GRAU integrated management system"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+
+dependencies = [
+    "streamlit>=1.28",
+    "pandas>=2.0",
+    "plotly>=5.18",
+]
+
+[project.optional-dependencies]
+dev = [
+    "hypothesis>=6.90",
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--strict-markers -v"
+markers = [
+    "property: Property-based tests using Hypothesis",
+    "unit: Unit tests",
+    "integration: Integration tests",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
+fail_under = 80
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
