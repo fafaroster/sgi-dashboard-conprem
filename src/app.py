@@ -51,12 +51,40 @@ _MAIN_PASSWORD = "conprem2026"
 
 if not st.session_state.get("main_auth", False):
     st.markdown("## 🔐 Dashboard SGI — CONPREM GRAU")
-    st.markdown("Ingrese la clave de acceso para continuar.")
-    pwd = st.text_input("Clave de acceso", type="password", key="main_login_input")
+    st.markdown("Ingrese sus datos para acceder.")
+    
+    col_login1, col_login2 = st.columns(2)
+    with col_login1:
+        user_name = st.text_input("Nombre", key="login_name_input", placeholder="Ej: Rodrigo Pinto")
+    with col_login2:
+        pwd = st.text_input("Clave de acceso", type="password", key="main_login_input")
+    
     if pwd:
         if pwd == _MAIN_PASSWORD:
-            st.session_state["main_auth"] = True
-            st.rerun()
+            if not user_name.strip():
+                st.warning("Ingrese su nombre para continuar")
+            else:
+                st.session_state["main_auth"] = True
+                st.session_state["auth_granted"] = True
+                st.session_state["logged_user"] = user_name.strip()
+                # Log access to file
+                from datetime import datetime
+                import os
+                log_dir = os.path.dirname(os.path.abspath(__file__))
+                log_path = os.path.join(log_dir, "..", "access_log.csv")
+                log_entry = f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')},{user_name.strip()}\n"
+                try:
+                    with open(log_path, "a", encoding="utf-8") as f:
+                        if os.path.getsize(log_path) == 0:
+                            f.write("fecha_hora,usuario\n")
+                        f.write(log_entry)
+                except FileNotFoundError:
+                    with open(log_path, "w", encoding="utf-8") as f:
+                        f.write("fecha_hora,usuario\n")
+                        f.write(log_entry)
+                except Exception:
+                    pass  # Don't block access if logging fails
+                st.rerun()
         else:
             st.error("Clave incorrecta")
     st.stop()
